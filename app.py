@@ -292,9 +292,9 @@ def view_marksheet():
 
         elems = []
         # Logo + Title
-        elems.append(Image("static/cmrlogo.png", width=130, height=80))
+        elems.append(Image("static/collegelogo.png", width=130, height=80))
         elems.append(Paragraph(
-            "<br/><b>CMR Institute of Technology, Bengaluru</b><br/>"
+            "<br/><b>Insert College Name</b><br/>"
             "<br/>"
             "<br/>"
             f"<i>Marksheet — Semester {semester}</i><br/>"
