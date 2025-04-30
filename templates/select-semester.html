@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Select Semester</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #eef3fc; margin:0; padding:0; }
+    .box { max-width:400px; margin:100px auto; padding:20px; background:white; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1); }
+    h3 { text-align:center; color:#2563eb; }
+    label { display:block; margin-top:15px; font-weight:bold; }
+    select, button { width:100%; padding:10px; margin-top:8px; font-size:16px; border-radius:4px; border:1px solid #ccc; box-sizing:border-box; }
+    button { background:#2563eb; color:white; border:none; cursor:pointer; }
+    button:hover { background:#1e40af; }
+  </style>
+</head>
+<body>
+
+  <div class="box">
+    <h3>Select Semester</h3>
+    <form method="POST" action="/view-marksheet">
+      <label for="semester">Semester:</label>
+      <select id="semester" name="semester" required>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+      </select>
+      <button type="submit">Generate PDF Marksheet</button>
+    </form>
+  </div>
+
+</body>
+</html>

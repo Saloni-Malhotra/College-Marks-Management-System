@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login - CMRIT Marksheet Portal</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #eef3fc;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 600px;
+      margin: 50px auto;
+      padding: 30px;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #1e3a8a;
+    }
+    .form-box {
+      margin: 30px auto;
+      max-width: 400px;
+      padding: 20px;
+      background: #f0f4ff;
+      border-radius: 8px;
+      text-align: center;
+    }
+    input {
+      width: 90%;
+      margin: 10px 0;
+      padding: 10px;
+      font-size: 15px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      font-size: 16px;
+      background: #2563eb;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      background: #cbd5ff;
+      border-bottom: 1px solid #aaa;
+    }
+  </style>
+</head>
+<body>
+
+<div class="top-bar">
+  <h2>CMRIT Marksheet Portal</h2>
+  <button onclick="window.location.href='/'">Go Back</button>
+</div>
+
+<div class="container">
+  <h1>Welcome! Please login to continue.</h1>
+  <div class="form-box">
+    <input type="text" id="username" placeholder="Username / Phone Number">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="login()">LOGIN</button>
+  </div>
+</div>
+
+<script>
+  function login() {
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
+
+    // Send credentials to backend via POST request
+    fetch('/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ username: username, password: password })
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        localStorage.setItem("userRole", data.role);  // Store user role in localStorage
+        alert("Login successful! Redirecting to your dashboard...");
+        if (data.role === 'mentor') {
+          window.location.href = '/mentor-dashboard';  // Redirect to mentor dashboard
+        } else if (data.role === 'student') {
+          window.location.href = '/student-dashboard';  // Redirect to student dashboard
+        }
+      } else {
+        alert(data.message);  // Show error message
+      }
+    })
+    .catch(error => console.error('Error:', error));
+  }
+</script>
+
+</body>
+</html>
+
