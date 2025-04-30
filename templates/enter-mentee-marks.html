@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Enter Mentee Marks</title>
+  <style>
+    body { font-family: Arial; background: #f4f7fc; margin: 0; padding: 0; }
+    .container { max-width: 800px; margin: 40px auto; padding: 20px; background: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    h2 { color: #2563eb; text-align: center; }
+    label { display: block; margin-top: 15px; font-weight: bold; }
+    select, input[type=text] { width: 100%; padding: 8px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; }
+    button { margin-top: 20px; padding: 10px 15px; background: #2563eb; color: white; border: none; border-radius: 4px; cursor: pointer; }
+    button:hover { background: #1e40af; }
+    .subject { margin-top: 10px; }
+    .flash { padding: 10px; margin-bottom: 15px; border-radius: 4px; }
+    .flash.success { background: #d1fae5; color: #065f46; }
+    .flash.danger { background: #fee2e2; color: #991b1b; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Enter Mentee Marks</h2>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% for category, msg in messages %}
+        <div class="flash {{ category }}">{{ msg }}</div>
+      {% endfor %}
+    {% endwith %}
+
+    {% if step == 'semester' %}
+      <!-- Step 1: pick semester -->
+      <form method="POST">
+        <label for="semester">Choose Semester:</label>
+        <select name="semester" id="semester" required>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+        </select>
+        <button type="submit">OK</button>
+      </form>
+
+    {% elif step == 'marks' %}
+      <!-- Step 2: select USN and enter marks -->
+      <form method="POST">
+        <input type="hidden" name="semester" value="{{ semester }}">
+
+        <label for="USN">Select Mentee (USN):</label>
+        <select name="USN" id="USN" required>
+          {% for usn in mentees_usn %}
+            <option>{{ usn }}</option>
+          {% endfor %}
+        </select>
+
+        <h3>Semester {{ semester }} Subjects</h3>
+        {% for subject in subjects %}
+          <div class="subject">
+            <label for="subject_{{subject}}">{{subject}}:</label>
+            <input type="text" name="subject_{{subject}}" id="subject_{{subject}}" required>
+          </div>
+        {% endfor %}
+
+        <button type="submit">Submit Marks</button>
+      </form>
+    {% endif %}
+  </div>
+</body>
+</html>

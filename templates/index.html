@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>College Marksheet Portal</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #eef3fc;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 20px;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+    header {
+      text-align: center;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #ccc;
+    }
+    .logo {
+      width: 150px;
+    }
+    h1 {
+      margin: 10px 0;
+      font-size: 28px;
+      color: #1e3a8a;
+    }
+    .intro {
+      margin: 20px 0;
+      font-size: 15px;
+      color: #333;
+      line-height: 1.6;
+    }
+    .role-select {
+      text-align: center;
+    }
+    .role-select button {
+      margin: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+      background: #2563eb;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    #auth-buttons {
+      margin-top: 15px;
+    }
+    footer {
+      text-align: center;
+      font-size: 14px;
+      margin-top: 30px;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <img src="static\collegelogo.png" alt="College Logo" class="logo">
+    <h1>College Marksheet Portal</h1>
+  </header>
+
+  <main>
+    <div class="intro">
+      <p>
+        Description of uni or any other content.
+      </p>
+    </div>
+
+    <div class="role-select">
+      <button onclick="selectRole('mentor')">As Mentor</button>
+      <button onclick="selectRole('student')">As Student</button>
+
+      <div id="auth-buttons" style="display: none;">
+        <button onclick="window.location.href='/register'">Register</button>
+        <button onclick="window.location.href='/login'">Log In</button>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>Contact Us<br>Email: xyz@gmail.com<br>Phone: +91 1234567890</p>
+  </footer>
+</div>
+
+<script>
+  function selectRole(role) {
+    localStorage.setItem("userRole", role); // store role for next pages
+    document.getElementById("auth-buttons").style.display = "block";
+  }
+</script>
+
+</body>
+</html>
